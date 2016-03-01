@@ -1,10 +1,11 @@
 require_relative "./_configure"
 
 DB.define_table("users")
-DB.define_column("users","name","string")
+DB.define_column("users","first_name","string")
+DB.define_column("users","last_name","string")
 DB.define_column("users","email", "string")
 DB.define_column("users","password","string")
-DB.define_column("users","debt_amount","integer")
+DB.define_column("users","debt_amount","float")
 
 DB.define_table("investments")
 DB.define_column("investments","investor_user_id","integer")
