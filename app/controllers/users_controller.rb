@@ -32,3 +32,8 @@ MyApp.get "/user/list" do
   @users = User.all
   erb :"/users/users_list"
 end
+
+MyApp.get "/user/update" do
+  @user = User.find_by_id(session["user_id"])
+  erb :"/users/update_user"
+end
