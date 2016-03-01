@@ -14,3 +14,10 @@ MyApp.post "/users/process/create" do
   @user.save
   erb :"users/user_created"
 end
+
+MyApp.get "/user/profile" do
+  @user = User.find_by_id(session["user_id"])
+  @investments = Investment.where 
+  erb :"users/user_profile"
+end
+

@@ -4,3 +4,6 @@
 
 <a href="/login">Login</a>
 <a href="/signup">Sign up</a>
+<% if session["user_id"] != nil %>
+  <a href="/logout">Logout</a>
+  <% end %>
