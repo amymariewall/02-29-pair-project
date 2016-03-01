@@ -17,6 +17,7 @@ end
 
 MyApp.get "/user/profile" do
   @user = User.find_by_id(session["user_id"]) 
+  #@investments = Investment.where(["investor_user_id" => @user.id])
   erb :"users/user_profile"
 end
 
