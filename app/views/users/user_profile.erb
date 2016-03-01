@@ -4,6 +4,9 @@
 
 <% if @user.id == session["user_id"]%>
 <a href="/user/update">Update</a>
+<form action = "/user/delete" method = "post">
+          <input type = "submit" value = "Delete">
+    </form>
 <%end%>
 
 

@@ -37,3 +37,20 @@ MyApp.get "/user/update" do
   @user = User.find_by_id(session["user_id"])
   erb :"/users/update_user"
 end
+
+MyApp.post "/user/process/update" do
+  @user = User.find_by_id(session["user_id"])
+  @user.first_name = params["first_name"]
+  @user.last_name = params["last_name"]
+  @user.email = params["email"]
+  @user.password = params["password"]
+  @user.debt_amount = params["debt_amount"]
+  @user.save
+  redirect "/user/profile/#{@user.id}"
+end
+
+MyApp.post "/user/delete" do
+  @user = User.find_by_id(session["user_id"])
+  @user.delete
+  redirect "/logout"
+end
