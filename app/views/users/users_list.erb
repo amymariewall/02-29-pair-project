@@ -4,7 +4,8 @@
 
 <% @users.each do |u| %>
 
-<%= u.first_name%> <%= u.last_name%><br><br>
+<a href="/user/profile/<%=u.id%>"><%= u.first_name%> <%= u.last_name%>
+<br><br>
 
 
 <%end%>
