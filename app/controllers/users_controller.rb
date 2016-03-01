@@ -11,7 +11,7 @@ MyApp.get "/signup" do
   erb :"users/create"
 end
 
-MyApp.post "/users/process/create" do
+MyApp.post "/create/user" do
   @user = User.new
   @user.first_name = params["first_name"]
   @user.last_name = params["last_name"]
