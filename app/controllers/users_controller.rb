@@ -1,5 +1,12 @@
 # All Users controllers go here
 
+MyApp.before "/user*" do
+  @user = User.find_by_id(session["user_id"])
+    if @user == nil
+      redirect "/login"
+    end
+  end
+
 MyApp.get "/signup" do 
   erb :"users/create"
 end
@@ -21,3 +28,7 @@ MyApp.get "/user/profile" do
   erb :"users/user_profile"
 end
 
+MyApp.get "/user/list" do
+  @users = User.all
+  erb :"/users/users_list"
+end
