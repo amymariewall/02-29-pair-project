@@ -6,7 +6,7 @@ MyApp.post "/status/create" do
   redirect "/user/profile"
 end
 
-MyApp.get "/update/edit/:update_id" do
+MyApp.post "/update/edit/:update_id" do
   @update = Update.find_by_id(params[:update_id])
   erb :"/updates/edit"
 end
@@ -17,6 +17,8 @@ MyApp.post "/update/process/:update_id" do
   @update.save
   redirect "/user/profile"
 end
-MyApp.post "/update/delete" do
-  
+MyApp.post "/update/delete/:update_id" do
+  @update = Update.find_by_id(params[:update_id])
+  @update.delete
+  redirect "/user/profile"
 end

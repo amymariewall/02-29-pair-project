@@ -5,8 +5,8 @@
 <% if @user.id == session["user_id"]%>
 <a href="/user/update">Update</a>
 <form action = "/user/delete" method = "post">
-          <input type = "submit" value = "Delete">
-    </form>
+    <input type = "submit" value = "Delete">
+</form>
 
   Status:<br>
   <form action="/status/create" method="post">
@@ -32,8 +32,16 @@
 <% end %>
 <%if @status_updates_time != [] %>
 <%@status_updates_time.each do |s|%>
-<%= s.status_update%><br><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. 
-<a href="/update/edit/<%=s.id%>">Edit</a><br><br>
+<%= s.status_update%><br><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. <br><br>
+<% if @user.id == session["user_id"]%>
+<form action = "/update/edit/<%=s.id%>" method = "post">
+          <input type = "submit" value = "Edit">
+</form>
+<form action = "/update/delete/<%=s.id%>" method = "post">
+          <input type = "submit" value = "Delete">
+    </form>
+    <br><br>
+<%end%>
 <%end%>
 <%end%>
 
