@@ -1,4 +1,11 @@
-<h2>Invest in <% @user_in_need.first_name %> <% @user_in_need.last_name %></h2>
+<h2>Invest in <%= @user_in_need.first_name %> <%= @user_in_need.last_name %></h2>
+
+<% if @errors != [] && @errors != nil %>
+    <% @errors.each do |e| %>
+    <%= e %><br>
+    <% end %>
+  <% end %>
+  
 <br>Amount needed: <%= @user_in_need.debt_amount %><br>
 <form method="post" action="/investments/invest/make/<%= @user_in_need.id %>">
   <input type="number" name="investment_amount" placeholder="$$$$">
