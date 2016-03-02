@@ -53,8 +53,13 @@ MyApp.post "/user/process/update" do
   @user.email = params["email"]
   @user.password = params["password"]
   @user.debt_amount = params["debt_amount"]
-  @user.save
-  redirect "/user/profile/#{@user.id}"
+  if @user.is_valid == true
+    @user.save
+    redirect "/user/profile/#{@user.id}"
+  else 
+    @errors = @user.get_errors
+    erb :"/users/update_user"
+  end
 end
 
 MyApp.post "/user/delete" do

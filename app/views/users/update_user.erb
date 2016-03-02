@@ -1,6 +1,11 @@
  
 <h1> Edit your profile!</h1>
 
+  <% if @errors != [] && @errors != nil %>
+    <% @errors.each do |e| %>
+    <%= e %><br>
+    <% end %>
+  <% end %>
 
  <form action = "/user/process/update" method = "post">
     First Name: 
