@@ -8,15 +8,16 @@
     <input type = "submit" value = "Delete">
 </form>
 
+  <br>
   Status:<br>
   <form action="/update/create" method="post">
     <input type="text" name = "status_update" placeholder="Update status..."><br>
     <input type="submit" value = "Post">
   </form>
 
-  <br>
-  Donations Received:<br>  
+  <br>  
   <% @donations_received.each do |d| %>
+    Donations Received:<br>
     <a href="/user/profile/<%= d.access_investor.id %>"><%= d.access_investor.first_name %> <%= d.access_investor.last_name %></a> <%= d.amount %><br>
     <% end %>
 
@@ -30,17 +31,21 @@
   $<%= @user.debt_amount %>
   </p>
 <% end %>
+
 <%if @status_updates_time != [] %>
-<%@status_updates_time.each do |s|%>
-<%= s.status_update%><br><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. <br><br>
+  <%@status_updates_time.each do |s|%>
+    <%= s.status_update%><br><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. <br><br>
+
 <% if @user.id == session["user_id"]%>
-<form action = "/update/edit/<%=s.id%>" method = "post">
-          <input type = "submit" value = "Edit">
-</form>
-<form action = "/update/delete/<%=s.id%>" method = "post">
-          <input type = "submit" value = "Delete">
-    </form>
-    <br><br>
+
+  <form action = "/update/edit/<%=s.id%>" method = "post">
+      <input type = "submit" value = "Edit">
+  </form>
+  <form action = "/update/delete/<%=s.id%>" method = "post">
+      <input type = "submit" value = "Delete">
+  </form>
+  <br>
+  <br>
 <%end%>
 <%end%>
 <%end%>
