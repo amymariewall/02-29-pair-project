@@ -9,11 +9,15 @@
     </form>
 <%end%>
 
+<a href="/investments/invest/<%= @user.id %>">Donate</a>
+
 
 <p>
-Amount needed:<br>
-$<%= @user.debt_amount %>
-</p>
+<% if @user.debt_amount != 0 || nil %>
+  Amount needed:<br>
+  $<%= @user.debt_amount %>
+  </p>
+<% end %>
 
 <br><br>
 <a href="/">Home</a><br>

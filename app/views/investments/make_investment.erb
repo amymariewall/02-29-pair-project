@@ -1,0 +1,7 @@
+<% if @users_in_need != [] %>
+
+  <p><% @users_in_need.each do |u| %>
+  <br><a href="/user/profile/<%= u.id %>"><%= u.first_name %> <%= u.last_name %></a> Amount Needed: <%= u.debt_amount %>
+  <% end %>
+
+<% end %>
