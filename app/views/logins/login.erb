@@ -1,5 +1,9 @@
 <h2>Login</h2>
 
+  <% if @error != nil %>
+    <%= @error %>
+  <% end %>
+
 <center>
   <form method="post" action="/login/create">
     <p>
