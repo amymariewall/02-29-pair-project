@@ -2,9 +2,10 @@
 
 <p>The Student Debt Reduction App - Eliminating America's student debt issue one donation at a time!!!!! REVOLUTION! </p>
 
-<a href="/login">Login</a>
-<a href="/signup">Sign up</a>
+<a href="/login">Login</a><br>
+<a href="/signup">Sign up</a><br>
 <% if session["user_id"] != nil %>
-  <a href="/logout">Logout</a>
+  <a href="/user/profile">Profile</a><br>
+  <a href="/logout">Logout</a><br>
   <a href="user/list">List of Users</a>
   <% end %>

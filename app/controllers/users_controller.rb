@@ -54,3 +54,25 @@ MyApp.post "/user/delete" do
   @user.delete
   redirect "/logout"
 end
+
+
+MyApp.get "/user/profile" do
+  @user = User.find_by_id(session["user_id"])   
+  redirect "/user/profile/#{@user.id}"
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
