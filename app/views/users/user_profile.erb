@@ -32,7 +32,7 @@
 <% end %>
 <%if @status_updates != [] %>
 <%@status_updates.each do |s|%>
-Posted at: <br><%= s.created_at%><br><br><%= s.status_update%><br><br> 
+Posted at: <br><%= (Time.now - s.created_at.to_time)/1.day%><br><br><%= s.status_update%><br><br> 
 <%end%>
 <%end%>
 
