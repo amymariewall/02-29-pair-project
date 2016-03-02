@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.string   "status_updates"
+    t.string   "status_update"
   end
 
   create_table "users", force: :cascade do |t|

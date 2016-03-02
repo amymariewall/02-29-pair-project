@@ -14,4 +14,4 @@ DB.define_column("investments","amount","float")
 
 DB.define_table("updates")
 DB.define_column("updates","user_id","integer")
-DB.define_column("updates","status_updates","string")
+DB.define_column("updates","status_update","string")
