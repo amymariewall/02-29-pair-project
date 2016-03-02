@@ -1,4 +1,12 @@
-MyApp.post "/status/create" do
+MyApp.before "/update*" do
+  @user = User.find_by_id(session["user_id"])
+    if @user == nil
+      redirect "/login"
+    end
+  end
+
+
+MyApp.post "/update/create" do
   @update = Update.new
   @update.status_update = params[:status_update]
   @update.user_id = session["user_id"]

@@ -9,6 +9,8 @@ MyApp.post "/login/create" do
   if @user != nil && @user.password == params[:password]
       session["user_id"] = @user.id    
       redirect "/user/profile/#{@user.id}"
+    else
+      redirect "/login"
   end
 end
 
