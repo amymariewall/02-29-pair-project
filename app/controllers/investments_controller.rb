@@ -14,5 +14,8 @@ MyApp.post "/investments/invest/make/:user_in_need_id" do
   @investment = Investment.new(investor_user_id: session["user_id"], student_user_id: params[:user_in_need_id], amount: params["investment_amount"])
   @investment.save
   @user_in_need = User.find_by_id(params[:user_in_need_id])
-  erb :"investments/successful_investment"
+  @user_in_need.debt_amount = (@user_in_need.debt_amount) - (@investment.amount)
+  @user_in_need.save
+  redirect "/user/profile/#{@user_in_need.id}"
+  #erb :"investments/successful_investment"
 end
