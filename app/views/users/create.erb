@@ -1,6 +1,10 @@
-<h2>Sign Up!</h2>
+<center><h2>Sign Up!</h2>
+  <% if @errors != [] && @errors != nil %>
+  <% @errors.each do |e| %>
+  <%= e %><br>
+  <% end %>
+  <% end %>
 
-<center>
   <form method="post" action="/create/user">
     <p>
       First Name

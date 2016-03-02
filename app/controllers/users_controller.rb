@@ -18,8 +18,13 @@ MyApp.post "/create/user" do
   @user.email = params["email"]
   @user.password = params["password"]
   @user.debt_amount = params["debt_amount"]
-  @user.save
-  erb :"users/user_created"
+  if @user.is_valid == true
+    @user.save
+    redirect "/login"
+  else 
+    @errors = @user.get_errors
+    erb :"users/create"
+  end
 end
 
 MyApp.get "/user/profile/:user_id" do
