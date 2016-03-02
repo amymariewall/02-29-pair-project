@@ -14,30 +14,31 @@ class Investment < ActiveRecord::Base
     return student
   end
 
-  def set_errors(user)
-    errors = []
+  def set_errors
+    @errors = []
     if self.amount == 0
-      errors << "Amount can't be 0"
+      @errors << "Amount can't be 0"
     end
 
-    if self.amount == ""
-      errors << "Please enter a valid amount"
+    if self.amount == "" || self.amount == nil
+      @errors << "Please enter a valid amount"
     end
 
-    # if self.amount != nil
-    #   if user.debt_amount < self.amount
-    #     errors << "Amount exceeds debt amount"
-    #   end
-    # end
+    if self.amount != nil
+      user = User.find_by_id(self.student_user_id)
+       if user.debt_amount < self.amount
+         @errors << "Amount exceeds debt amount"
+       end
+     end
   end
 
-  def get_errors(user)
-    errors = self.set_errors(user)
-    return errors
+  def get_errors
+    return @errors
   end
 
-  def is_valid(user)
-    if self.get_errors(user) == []
+  def is_valid
+    self.set_errors
+    if self.get_errors == []
     return true
     else
     return false

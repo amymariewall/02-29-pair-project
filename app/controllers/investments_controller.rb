@@ -20,13 +20,13 @@ end
 MyApp.post "/investments/invest/make/:user_in_need_id" do 
   @investment = Investment.new(investor_user_id: session["user_id"], student_user_id: params[:user_in_need_id], amount: params["investment_amount"])
   @user_in_need = User.find_by_id(params[:user_in_need_id])
-  if @investment.is_valid(@user_in_need) == true
+  if @investment.is_valid == true
   @investment.save
   @user_in_need.debt_amount = (@user_in_need.debt_amount) - (@investment.amount)
   @user_in_need.save
   redirect "/user/profile/#{@user_in_need.id}"
-  elsif @investment.is_valid(@user_in_need) == false
-    @errors = @investment.get_errors(@user_in_need)
+  elsif @investment.is_valid == false
+    @errors = @investment.get_errors
     binding.pry
     erb :"investments/invest"
   end
