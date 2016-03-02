@@ -7,16 +7,24 @@
 <form action = "/user/delete" method = "post">
           <input type = "submit" value = "Delete">
     </form>
+
+<% else %>
+  <a href="/investments/invest/<%= @user.id %>">Donate</a>
 <%end%>
-
-<a href="/investments/invest/<%= @user.id %>">Donate</a>
-
 
 <p>
 <% if @user.debt_amount != 0 || nil %>
   Amount needed:<br>
   $<%= @user.debt_amount %>
   </p>
+<% end %>
+
+<% if @investments != [] %>
+  <% @investments.each do |i| %>
+  Donations:<br>
+  <a href="/user/profile/<%= i.access_student.id %>"><%= i.access_student.first_name %> <%= i.access_student.last_name %></a>
+  <%= i.amount %><br>
+  <% end %>
 <% end %>
 
 <br><br>
