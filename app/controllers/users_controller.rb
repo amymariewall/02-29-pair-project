@@ -27,6 +27,7 @@ MyApp.get "/user/profile/:user_id" do
   @investments = Investment.where({"investor_user_id" => @user.id})
   @donations_received = Investment.where({"student_user_id" => @user.id})
   @status_updates = Update.where({"user_id" => @user.id})
+  @status_updates_time = @status_updates.order(created_at: :desc)
   erb :"users/user_profile"
 end
 
