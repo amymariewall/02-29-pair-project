@@ -1,3 +1,4 @@
+
 MyApp.before "/update*" do
   @user = User.find_by_id(session["user_id"])
     if @user == nil
