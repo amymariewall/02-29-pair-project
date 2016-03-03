@@ -74,7 +74,8 @@ MyApp.get "/user/profile" do
   redirect "/user/profile/#{@user.id}"
 end
 
-MyApp.get "/search/user" do 
+MyApp.get "/search/user" do
+session["path_info"] = request.path_info  
   erb :"users/search"
 end
 
