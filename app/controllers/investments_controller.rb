@@ -1,4 +1,6 @@
 # Investments controller actions go here
+
+
 MyApp.before "/investments*" do
   @user = User.find_by_id(session["user_id"])
     if @user == nil
@@ -36,6 +38,8 @@ MyApp.post "/investments/:investment_id/update/paid" do
   @investment = Investment.find_by_id(params[:investment_id])
     @investment.paid = true
     @investment.save
+    @investment = Investment.find_by_id(params[:investment_id])
+    Pony.mail(:to => @investment.access_investor.email, :from => @investment.access_student.email, :subject => 'Payment Received', :body => 'Thanks, dude.')
     redirect "/user/profile/#{session["user_id"]}"
 end
 
