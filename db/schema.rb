@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer  "investor_user_id"
     t.integer  "student_user_id"
     t.float    "amount"
+    t.boolean  "paid"
   end
 
   create_table "updates", force: :cascade do |t|

@@ -18,7 +18,7 @@ MyApp.get "/investments/invest/:user_id" do
 end
 
 MyApp.post "/investments/invest/make/:user_in_need_id" do 
-  @investment = Investment.new(investor_user_id: session["user_id"], student_user_id: params[:user_in_need_id], amount: params["investment_amount"])
+  @investment = Investment.new(investor_user_id: session["user_id"], student_user_id: params[:user_in_need_id], amount: params["investment_amount"], paid: false)
   @user_in_need = User.find_by_id(params[:user_in_need_id])
   if @investment.is_valid == true
   @investment.save
@@ -27,7 +27,20 @@ MyApp.post "/investments/invest/make/:user_in_need_id" do
   redirect "/user/profile/#{@user_in_need.id}"
   elsif @investment.is_valid == false
     @errors = @investment.get_errors
-    binding.pry
     erb :"investments/invest"
   end
 end
+
+  
+MyApp.post "/investments/:investment_id/update/paid" do 
+  @investment = Investment.find_by_id(params[:investment_id])
+    @investment.paid = true
+    @investment.save
+    redirect "/user/profile/#{session["user_id"]}"
+end
+
+
+
+
+
+

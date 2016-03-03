@@ -16,9 +16,15 @@
   </form>
 
   <br>  
+  Donations Received:<br>
   <% @donations_received.each do |d| %>
-    Donations Received:<br>
     <a href="/user/profile/<%= d.access_investor.id %>"><%= d.access_investor.first_name %> <%= d.access_investor.last_name %></a> <%= d.amount %><br>
+    <% if d.paid == nil || d.paid == false %>
+    <form action="/investments/<%= d.id %>/update/paid" method="post"> 
+      <input type="submit" value="Mark as Paid">
+    </form>
+    <% elsif d.paid == true %>PAID<br>
+    <% end %>
     <% end %>
 
 <% else %>
