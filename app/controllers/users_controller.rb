@@ -74,6 +74,24 @@ MyApp.get "/user/profile" do
   redirect "/user/profile/#{@user.id}"
 end
 
+MyApp.get "/search/user" do 
+  erb :"users/search"
+end
+
+MyApp.post "/search/user/process" do 
+  search_hash = {}
+  search_hash[params["search_criteria"]] = params["search_term"]
+  binding.pry
+  @search_results = User.where(search_hash)
+  binding.pry
+  if @search_results == []
+    @error = "No user found for that search. Search again."
+    erb :"users/search"
+  else
+  erb :"users/search_results"
+  end
+end
+
 
 
 
