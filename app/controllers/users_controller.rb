@@ -3,6 +3,7 @@
 MyApp.before "/user*" do
   @user = User.find_by_id(session["user_id"])
     if @user == nil
+      session["path_info"] = request.path_info
       redirect "/login"
     end
   end
@@ -28,6 +29,7 @@ MyApp.post "/create/user" do
 end
 
 MyApp.get "/user/profile/:user_id" do
+  session["path_info"] = nil
   @user = User.find_by_id(params[:user_id]) 
   @investments = Investment.where({"investor_user_id" => @user.id})
   @donations_received = Investment.where({"student_user_id" => @user.id})
@@ -74,8 +76,7 @@ MyApp.get "/user/profile" do
   redirect "/user/profile/#{@user.id}"
 end
 
-MyApp.get "/search/user" do
-session["path_info"] = request.path_info  
+MyApp.get "/search/user" do 
   erb :"users/search"
 end
 

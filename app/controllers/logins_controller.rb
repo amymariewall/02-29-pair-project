@@ -7,8 +7,12 @@ end
 MyApp.post "/login/create" do 
   @user = User.find_by_email(params[:email])
     if @user != nil && @user.password == params[:password]
-      session["user_id"] = @user.id 
+      session["user_id"] = @user.id
+      if session["path_info"] == nil
+        redirect "/user/profile/#{session["user_id"]}"
+      else
       redirect session["path_info"]
+    end
     elsif @user != nil && @user.password != params[:password]
       @error = "Invalid password."
       erb :"logins/login"
