@@ -81,9 +81,7 @@ end
 MyApp.post "/search/user/process" do 
   search_hash = {}
   search_hash[params["search_criteria"]] = params["search_term"]
-  binding.pry
   @search_results = User.where(search_hash)
-  binding.pry
   if @search_results == []
     @error = "No user found for that search. Search again."
     erb :"users/search"
