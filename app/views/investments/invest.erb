@@ -1,4 +1,4 @@
-<h2>Invest in <%= @user_in_need.first_name %> <%= @user_in_need.last_name %></h2>
+<center><h2>Invest in <%= @user_in_need.first_name %> <%= @user_in_need.last_name %></h2>
 
 <% if @errors != [] && @errors != nil %>
     <% @errors.each do |e| %>
@@ -11,3 +11,7 @@
   <input type="number" name="investment_amount" placeholder="$$$$">
   <br><br><input type="submit">
 </form>
+
+<br>
+<a href="/">Home</a>
+</center>
