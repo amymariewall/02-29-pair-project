@@ -27,7 +27,7 @@ MyApp.post "/investments/invest/make/:user_in_need_id" do
   @user_in_need.debt_amount = (@user_in_need.debt_amount) - (@investment.amount)
   @user_in_need.save
   Pony.mail(:to => @investment.access_student.email, :from => @investment.access_investor.email, :subject => 'Pledge Alert!', :body => "#{@investment.access_investor.first_name} #{@investment.access_investor.last_name} sent you a pledge of $#{@investment.amount}")
-  Pony.mail(:to => @investment.access_investor.email, :from => 'do-not-reply', :subject => 'Thanks for your pledge!', :body => "Thank you for pledging $#{@investment.amount} to #{@investment.access_student.first_name} #{@investment.access_student.last_name}. To make a payment, click here: https://www.dwolla.com/")
+  Pony.mail(:to => @investment.access_investor.email, :from => @investment.access_investor.email, :subject => 'Thanks for your pledge!', :body => "Thank you for pledging $#{@investment.amount} to #{@investment.access_student.first_name} #{@investment.access_student.last_name}. To make a payment, click here: https://www.dwolla.com/")
   redirect "/user/profile/#{@user_in_need.id}"
   elsif @investment.is_valid == false
     @errors = @investment.get_errors
