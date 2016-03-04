@@ -45,9 +45,6 @@ MyApp.post "/investments/:investment_id/update/paid" do
     redirect "/user/profile/#{session["user_id"]}"
 end
 
-MyApp.get "/test" do
-  erb :"investments/successful_investment"
-end
 
 
 
