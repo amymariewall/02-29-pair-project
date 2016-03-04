@@ -29,8 +29,10 @@
 
 <% else %>
   <a href="/investments/invest/<%= @user.id %>">Donate</a>
-<%end%>
-
+<%end%><br>
+<%if @user.id != session["user_id"]%> 
+<a href="/user/profile/<%=session["user_id"]%>">Back to my profile</a>
+<%end%><br>
 <p>
 <% if @user.debt_amount != 0 || nil %>
   <h3>Amount needed:</h3>
@@ -45,7 +47,7 @@
 <h3> <%= @user.first_name%>'s recent status updates:</h3>
 <%end%>
   <%@status_updates_time.each do |s|%>
-    <%= s.status_update%><br><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. <br><br>
+    <%= s.status_update%><br><b><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. </b><br><br>
 
 <% if @user.id == session["user_id"]%>
 
@@ -65,7 +67,7 @@
 <h3> Recently made donations:</h3>
   <% @investments.each do |i| %>
   <a href="/user/profile/<%= i.access_student.id %>"><%= i.access_student.first_name %> <%= i.access_student.last_name %></a>
-  <%= i.amount %><br>
+  - $<%= i.amount %><br>
   <% end %>
 <% end %>
 
