@@ -14,22 +14,41 @@ class Investment < ActiveRecord::Base
     return student
   end
 
-  def set_errors
+  def initialize_errors_array
     @errors = []
+  end
+
+
+  def set_wrong_amount_errors
     if self.amount == 0
       @errors << "Amount can't be 0"
     end
+  end
 
-    if self.amount == "" || self.amount == nil
-      @errors << "Please enter a valid amount"
-    end
 
-    if self.amount != nil
+  def set_excessive_amount_errors
+    amount = self.amount
+    if amount != nil 
       user = User.find_by_id(self.student_user_id)
-       if user.debt_amount < self.amount
+       if user.debt_amount < amount
          @errors << "Amount exceeds debt amount"
        end
-     end
+    end
+  end
+
+
+  def set_blank_entry_errors
+    amount = self.amount
+    if amount.blank?
+      @errors << "Please enter a valid amount"
+    end
+  end
+
+  def set_errors
+    self.initialize_errors_array
+    self.set_wrong_amount_errors
+    self.set_excessive_amount_errors
+    self.set_blank_entry_errors
   end
 
   def get_errors

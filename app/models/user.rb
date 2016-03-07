@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
 
+
+
   def set_errors
     errors = []
     if self.first_name == ""

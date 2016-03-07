@@ -31,6 +31,7 @@ end
 MyApp.get "/user/profile/:user_id" do
   session["path_info"] = nil
   @user = User.find_by_id(params[:user_id]) 
+  @user_presenter = UserPresenter.new(@user)
   @investments = Investment.where({"investor_user_id" => @user.id})
   @donations_received = Investment.where({"student_user_id" => @user.id})
   @status_updates = Update.where({"user_id" => @user.id})
