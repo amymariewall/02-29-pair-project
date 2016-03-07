@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+#this class contains all of our methods to set errors
 
   def set_errors
     @errors = []
