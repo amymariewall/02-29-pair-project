@@ -2,17 +2,15 @@ class User < ActiveRecord::Base
 
 
   def set_errors
-    errors = []
+    errors = {}
     if self.first_name == ""
-      errors << "First name cannot be blank"
+      # Add first name related error to the hash.
+      errors["first_name"] = "First name cannot be blank"
     end
 
     if self.last_name == ""
-      errors << "Last name cannot be blank"
-    end
-
-    if self.email == ""
-      errors << "Email cannot be blank"
+      # Add last name related error to the hash.
+      errors["last_name"] = "Last name cannot be blank"
     end
 
 
