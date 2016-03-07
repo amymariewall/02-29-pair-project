@@ -1,5 +1,5 @@
-<h2><%= @user.first_name %> 
-<%= @user.last_name %></h2>
+<h1><%= @user.first_name %> 
+<%= @user.last_name %></h1>
 
 
 <% if @user.id == session["user_id"]%>
@@ -9,14 +9,14 @@
 </form>
 
   <br>
-  Status:<br>
+  <h3>Update your status:</h3>
   <form action="/update/create" method="post">
     <input type="text" name = "status_update" placeholder="Update status..."><br>
     <input type="submit" value = "Post">
   </form>
 
   <br>  
-  Donations Received:<br>
+  <h3>Donations Received:</h3><br>
   <% @donations_received.each do |d| %>
     <a href="/user/profile/<%= d.access_investor.id %>"><%= d.access_investor.first_name %> <%= d.access_investor.last_name %></a> <%= d.amount %><br>
     <% if d.paid == nil || d.paid == false %>
@@ -29,18 +29,25 @@
 
 <% else %>
   <a href="/investments/invest/<%= @user.id %>">Donate</a>
-<%end%>
-
+<%end%><br>
+<%if @user.id != session["user_id"]%> 
+<a href="/user/profile/<%=session["user_id"]%>">Back to my profile</a>
+<%end%><br>
 <p>
 <% if @user.debt_amount != 0 || nil %>
-  Amount needed:<br>
+  <h3>Amount needed:</h3>
   $<%= @user.debt_amount %>
   </p>
 <% end %>
 
 <%if @status_updates_time != [] %>
+<% if @user.id == session["user_id"]%>
+<h3> Your recent status updates</h3>
+<%else%>
+<h3> <%= @user.first_name%>'s recent status updates:</h3>
+<%end%>
   <%@status_updates_time.each do |s|%>
-    <%= s.status_update%><br><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. <br><br>
+    <%= s.status_update%><br><b><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. </b><br><br>
 
 <% if @user.id == session["user_id"]%>
 
@@ -57,10 +64,10 @@
 <%end%>
 
 <% if @investments != [] %><br><br>
-Donations:<br>
+<h3> Recently made donations:</h3>
   <% @investments.each do |i| %>
   <a href="/user/profile/<%= i.access_student.id %>"><%= i.access_student.first_name %> <%= i.access_student.last_name %></a>
-  <%= i.amount %><br>
+  - $<%= i.amount %><br>
   <% end %>
 <% end %>
 
