@@ -2,15 +2,19 @@ class User < ActiveRecord::Base
 
 
   def set_errors
-    errors = {}
+    problems = {}
     if self.first_name == ""
       # Add first name related error to the hash.
-      errors["first_name"] = "First name cannot be blank"
+      problems["first_name"] = "First name cannot be blank"
     end
 
     if self.last_name == ""
       # Add last name related error to the hash.
-      errors["last_name"] = "Last name cannot be blank"
+      problems["last_name"] = "Last name cannot be blank"
+    end
+
+    if self.email == ""
+      problems["email"] = "Email cannot be blank"
     end
 
 
@@ -18,14 +22,14 @@ class User < ActiveRecord::Base
     #   User.where.not({"id" => self.id}).find_by_email(self.email) != nil
     #   errors << "Email is already in use by another account"
     if self.email.scan("@") == []
-      errors << "You did not enter a valid email address"
+      problems << "You did not enter a valid email address"
     end
     
     if self.password == ""
-      errors << "Password cannot be blank"
+      problems << "Password cannot be blank"
     end
 
-    return errors
+    return problems
   end
 
   def get_errors
