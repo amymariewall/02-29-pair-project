@@ -41,6 +41,23 @@ class InvestmentTest < Minitest::Test
     @investment2.amount = 400.0
     @investment2.save
 
+    @investment3 = Investment.new
+    @investment3.investor_user_id = @investor.id
+    @investment3.student_user_id = @student.id
+    @investment3.amount = 0
+    @investment3.save
+
+    @investment4 = Investment.new
+    @investment4.investor_user_id = @investor.id
+    @investment4.student_user_id = @student.id
+    @investment4.amount = nil
+    @investment4.save
+
+    @investment5 = Investment.new
+    @investment5.investor_user_id = @investor.id
+    @investment5.student_user_id = @student.id
+    @investment5.amount = ""
+    @investment5.save
 
   end
 
@@ -58,25 +75,34 @@ class InvestmentTest < Minitest::Test
     assert_empty @investment2.get_errors
   end
 
-  # def test_set_blank_entry_errors
-  #   refute_includes(@air_force_1.actors, @a2)
-  # end  
+  def test_set_wrong_amount_errors
+    @investment3.initialize_errors_array
+    @investment3.set_wrong_amount_errors
+    assert_includes(@investment3.get_errors, "Amount can't be 0")
+    refute_empty @investment3.get_errors
+  end
 
-  # def test_set_errors
-  # end
+  def test_set_errors
+    @investment.set_errors
+    assert_includes(@investment.get_errors, "Amount exceeds debt amount")
+  end
 
+  def test_set_errors_wrong_amount
+    @investment3.set_errors
+    assert_includes(@investment3.get_errors, "Amount can't be 0")
+  end
 
-  # def test_is_valid
-  # end
+  def test_set_errors_blank_entry
+    @investment4.set_errors
+    @investment5.set_errors
+    assert_includes(@investment4.get_errors, "Please enter a valid amount")
+    assert_includes(@investment5.get_errors, "Please enter a valid amount")
+  end
 
-  # def test_get_a_directors_movies
-  #   assert_includes(@david_lean.movies, @m1)
-  #   assert_includes(@david_lean.movies, @m2)
-  #   assert_includes(@david_lean.movies, @m3)
-  #   refute_includes(@david_lean.movies, @m4)
-  # end
-
-
+  def test_is_valid
+    assert_equal(@investment.is_valid, false)
+    assert_equal(@investment2.is_valid, true)
+  end
 
 end
 
