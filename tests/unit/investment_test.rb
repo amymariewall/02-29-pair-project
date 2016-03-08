@@ -32,36 +32,49 @@ class InvestmentTest < Minitest::Test
     @investment = Investment.new
     @investment.investor_user_id = @investor.id
     @investment.student_user_id = @student2.id
-    @investment.amount = 500
+    @investment.amount = 500.0
     @investment.save
 
+    @investment2 = Investment.new
+    @investment2.investor_user_id = @investor.id
+    @investment2.student_user_id = @student2.id
+    @investment2.amount = 400.0
+    @investment2.save
+
+
   end
 
 
-  def test_set_excessive_amount_errors
-    @errors = @investment.set_excessive_amount_errors
-
-    assert_includes(@errors, "Amount exceeds debt amount")
-    refute_includes(@errors, [])
+  def test_set_excessive_amount_errors_with_error
+    @investment.initialize_errors_array
+    @investment.set_excessive_amount_errors
+    assert_includes(@investment.get_errors, "Amount exceeds debt amount")
+    refute_empty @investment.get_errors
   end  
 
-  def test_set_blank_entry_errors
-    refute_includes(@air_force_1.actors, @a2)
-  end  
-
-  def test_set_errors
+  def test_set_excessive_amount_errors_no_error
+    @investment2.initialize_errors_array
+    @investment2.set_excessive_amount_errors
+    assert_empty @investment2.get_errors
   end
 
+  # def test_set_blank_entry_errors
+  #   refute_includes(@air_force_1.actors, @a2)
+  # end  
 
-  def test_is_valid
-  end
+  # def test_set_errors
+  # end
 
-  def test_get_a_directors_movies
-    assert_includes(@david_lean.movies, @m1)
-    assert_includes(@david_lean.movies, @m2)
-    assert_includes(@david_lean.movies, @m3)
-    refute_includes(@david_lean.movies, @m4)
-  end
+
+  # def test_is_valid
+  # end
+
+  # def test_get_a_directors_movies
+  #   assert_includes(@david_lean.movies, @m1)
+  #   assert_includes(@david_lean.movies, @m2)
+  #   assert_includes(@david_lean.movies, @m3)
+  #   refute_includes(@david_lean.movies, @m4)
+  # end
 
 
 
