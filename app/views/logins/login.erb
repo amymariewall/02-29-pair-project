@@ -2,31 +2,31 @@
 
 <div class="container center_div">
   <div class="block text-center">
-  <div class="container-fluid">
-    <h2 class="m-b-md">
-      Login to StuLo
-    </h2>
+    <div class="container-fluid">
+      <h2 class="m-b-md">
+        Login to StuLo
+      </h2>
 
-    <% if @error != nil %>
-      <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-          <%= @error %>
-        <% end %>
-      </div>
-      
-    <form class="form-block" method="post" action="/login/create" style="margin: 0 300px">
-      <input class="form-control m-b" type="text" name="email" placeholder="Email Address">
-      <input class="form-control m-b" type="password" name="password"placeholder="Password">
-      <button class="btn btn-primary m-b">Login</button>
-    </form>
-    <small class="text-muted">
-      <a href="#">Forgot Password?</a>
-    </small><br>
-    <small class="text-muted">
-      <a href="/">Home</a>
-    </small>
+      <% if @error != nil %>
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+            <%= @error %>
+          <% end %>
+        </div>
+        
+      <form class="form-block" method="post" action="/login/create" style="margin: 0 300px">
+        <input class="form-control m-b" type="text" name="email" placeholder="Email Address">
+        <input class="form-control m-b" type="password" name="password"placeholder="Password">
+        <button class="btn btn-primary m-b">Login</button>
+      </form>
+      <small class="text-muted">
+        <a href="#">Forgot Password?</a>
+      </small><br>
+      <small class="text-muted">
+        <a href="/">Home</a>
+      </small>
 
+    </div>
   </div>
-</div>
 </div>
