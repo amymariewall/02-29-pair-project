@@ -1,4 +1,29 @@
 <center><h2>Login</h2>
+<div class="block text-center">
+  <div class="container-fluid">
+    <h4 class="m-b-md">
+      Sign in and get started <strong>Today!</strong>
+    </h4>
+    <form class="form-inline" method ="post" action="/login/create">
+      <input class="form-control m-b" name = "email" placeholder="email address">
+      <input class="form-control m-b" type="password" placeholder="Create a Password">
+      <button class="btn btn-primary m-b">Log In</button>
+    </form>
+  </div>
+</div>
+<div class="block block-bordered text-center">
+  <div class="container-fluid">
+   <blockquote class="pull-quote">
+      <p>
+        “Notice that simple inset border above. Isn't it lovely.”
+      </p>
+      <cite>Mark Otto, Huge Nerd</cite>
+    </blockquote>
+  </div>
+</div>
+
+
+
 
   <% if @error != nil %>
     <%= @error %>
