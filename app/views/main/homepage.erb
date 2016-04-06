@@ -1,12 +1,30 @@
-<h1>Welcome to Stulo!</h1>
+<div class="container">
 
-<p>The Student Debt Reduction App - Eliminating America's student debt issue one donation at a time! Use this site to find a student in need or add yourself as a student in need. </p>
+<ul class="nav nav-bordered">
+  <li class="active">
+    <a href="/user/profile">Profile</a>
+  </li>
+  <li class="active">
+    <a href="/search/user">Browse Students</a>
+  </li>
+  
+  <% if session["user_id"] != nil %>
+  <li class="active">
+    <a href="/logout">Log Out</a>
+  </li>
+  <li class="active">
+    <a href="user/list">List of Users</a>
+  </li>
+</ul>
+<%end%>
 
-<a href="/login">Login</a><br>
-<a href="/signup">Sign up</a><br>
-<a href="/search/user">Find A Student in Need</a><br>
-<% if session["user_id"] != nil %>
-  <a href="/user/profile">Profile</a><br>
-  <a href="/logout">Logout</a><br>
-  <a href="user/list">List of Users</a>
-  <% end %>
+
+  <div class="block text-center">
+    <h1 class="block-title">Welcome to StuLo</h1>
+    <h4 class="text-muted">The Student Debt Reduction App - Eliminating America's student debt issue one donation at a time.</h4>
+    <% if session["user_id"] == nil %>
+    <a href="/login"><button class="btn btn-primary m-t"br>Login</button></a>
+    <a href="/signup"><button class="btn btn-primary m-t"br>Sign Up</button></a>
+    <%end%>
+  </div>
+</div>
