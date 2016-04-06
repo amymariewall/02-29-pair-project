@@ -1,23 +1,33 @@
-<center><h2>Sign Up!</h2>
+
+
+  <div class="block text-center">
+  <div class="container-fluid">
+  <center><h2>Sign Up for StuLo!</h2>
   <% if @errors != [] && @errors != nil %>
   <% @errors.each do |e| %>
   <%= e %><br>
   <% end %>
   <% end %>
-
-  <form method="post" action="/create/user">
-    <p>
-      First Name
-      <input type="text" name="first_name" placeholder="Enter your first name">
-      <br><br>Last Name
-      <input type="text" name="last_name" placeholder="Enter your last name">
-      <br><br>Email Address
-      <input type="text" name="email" placeholder="Enter your email">
-      <br><br>Password
-      <input type="password" name="password" placeholder="Enter your password">
-      <br><br>Debt Amount, if applicable
-      <input type="number" name="debt_amount" placeholder="$$$$">
-      <br><br><input type="submit">
-    </p>
-  </form>
-</center>
+    <h4 class="m-b-md">
+      Sign up and get started <strong>Today!</strong>
+    </h4>
+    <form class="form-block" method ="post" action="/create/user" style="margin: 0 500px">
+      <input class="form-control m-b" name = "email" placeholder="email address">
+      <input class="form-control m-b" type="password" name="password" placeholder="Create a Password">
+      <input class="form-control m-b" name="first_name" placeholder="First Name">
+      <input class="form-control m-b" name="last_name" placeholder="Last Name">
+      <input class="form-control m-b" name="debt_amount" placeholder="Debt amount">
+      <button class="btn btn-primary m-b">Sign Up</button>
+    </form>
+  </div>
+</div>
+<div class="block block-bordered text-center">
+  <div class="container-fluid">
+   <blockquote class="pull-quote">
+      <p>
+        “Helping students, one donation at a time.”
+      </p>
+      <cite>Amy & Tyler, Co-Creators</cite>
+    </blockquote>
+  </div>
+</div>

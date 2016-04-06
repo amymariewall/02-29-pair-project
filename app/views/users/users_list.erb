@@ -1,13 +1,28 @@
-<h1> List of users:</h1>
+<div class="container">
+<ul class="nav nav-bordered">
+  <li class="active">
+    <a href="/user/profile">Profile</a>
+  </li>
+  <li class="active">
+    <a href="/search/user">Browse Students</a>
+  </li>
+  <li class="active">
+    <a href="/logout">Log Out</a>
+  </li>
+</ul>
+<br>
+  <div class="text-center">
 
+  <h1>List of Users</h1>
 
+  <% @users.each do |u| %>
 
-<% @users.each do |u| %>
-
-<a href="/user/profile/<%=u.id%>"><%= u.first_name%> <%= u.last_name%>
-<br><br>
-
-
-<%end%>
-<br><br>
-<a href="/">Home</a>
+  <a href="/user/profile/<%=u.id%>"><%= u.first_name%> <%= u.last_name%></a>
+  <br><br>
+  <%end%>
+  </div>
+    <div class="block block-bordered text-center">
+      <a href="/">Home</a>
+    </div>
+  </div>
+</div>

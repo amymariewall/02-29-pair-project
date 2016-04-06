@@ -1,19 +1,34 @@
+<div class="container">
+  <ul class="nav nav-bordered">
+    <li class="active">
+      <a href="/user/profile">Profile</a>
+    </li>
+    <li class="active">
+      <a href="/user/list">List of Users</a>
+    </li>
+    <li class="active">
+      <a href="/">Home</a>
+    </li>
+    <li class="active">
+      <a href="/logout">Log Out</a>
+    </li>
+  </ul>
 
-<h2>Find a user:</h2>
-  <% if @error != nil %>
-  <%= @error %><br>
+  <h2>Find a user:</h2>
+    <% if @error != nil %>
+    <%= @error %><br>
   <% end %>
+  
+
 
   <form method="post" action="/search/user/process">
-    <p>
-      Search By:
-      <select name="search_criteria">
-        <option selected disabled>--</option>
-        <option value="email">Email</option>
-        <option value="first_name">First Name</option>
-        <option value="last_name">Last Name</option>
-      </select>
-      <input type="text" name="search_term" placeholder="Search">
+    <select class="custom-select" name="search_criteria">
+      <option selected disabled>--</option>
+      <option value="email">Email</option>
+      <option value="first_name">First Name</option>
+      <option value="last_name">Last Name</option>
+    </select>
+    <input type="text" name="search_term" placeholder="Search">
       <br><br><input type="submit" value="Search">
-    </p>
   </form>
+</div>
