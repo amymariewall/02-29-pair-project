@@ -1,9 +1,36 @@
+
 <div class="container">
-  <!-- HEADING -->
-  <div><h1><%= @user.first_name %> 
-  <%= @user.last_name %></h1></div>
 
 <% if @user.id == session["user_id"]%>
+
+  <div>
+      <ul class="nav nav-pills">
+      <li>
+        <a href="/user/list">
+          <span class="icon icon-users"></span>
+          List of Users
+        </a>
+      </li>
+      <li>
+        <a href="/user/update">
+          <span class="icon icon-cog"></span>
+          Update Settings
+        </a>
+      </li>
+      <li>
+        <a href="/">
+          <span class="icon icon-home"></span>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="/logout">
+          <span class="icon icon-logout"></span>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </div>  
 
   <div class="block text-center">
     <h1 class="block-title"><%= @user.first_name %> 
@@ -12,28 +39,50 @@
       <div class="input-group">
         <input type="text" class="form-control" name="status_update" placeholder="Update status...">
         <span class="input-group-btn">
-          <input type="submit" value="Post New Status" class="btn btn-default">
+          <input type="submit" value="Post New Status" class="btn btn-primary">
         </span>
       </div>
     </form> 
   </div>
 
+  <%if @status_updates_time != [] %>
+  <div class="text-center">
+    <h3><%= @user_presenter.status_updates_header(session["user_id"]) %></h3>
+    <%@status_updates_time.each do |s|%>
+    <blockquote class="pull-quote">
+        <p>
+          <i><%= s.status_update%></i>
+        </p>
+      <cite><%= (Time.now - s.created_at.to_time).to_i/60 %> Minutes ago.</cite>
+    
+      <% if @user.id == session["user_id"]%>
 
-  
-  <div>
-  <h3>Update your status:</h3>
-  <form action="/update/create" method="post">
-    <input type="text" name = "status_update" placeholder="Update status..."><br>
-    <input type="submit" value = "Post">
-  </form>    
+        <ul class="nav nav-pills">
+              <li>
+                <form action = "/update/edit/<%=s.id%>" method = "post">
+                  <input type = "submit" value = "Edit" class="btn btn-primary">
+                </form>
+              </li>
+              <li>
+                <form action = "/update/delete/<%=s.id%>" method = "post">
+                  <input type = "submit" value = "Delete" class="btn btn-primary">
+                </form>
+              </li>
+        </ul>
+      </blockquote>
+      <%end%>
+    <%end%>
+  </div>
+  <%end%>
+
+
+
+
+
 
   </div>
 
-  <div>    
-    <a href="/user/update">Update</a>
-    <form action = "/user/delete" method = "post">
-        <input type = "submit" value = "Delete">
-    </form>
+  
 
     <%if @status_updates_time != [] %>
 
@@ -104,9 +153,12 @@
 
   <div>
 
-<br><br>
-<a href="/">Home</a><br>
-<a href="/user/list">List of Users</a>
+<div>    
+    <a href="/user/update">Update</a>
+    <form action = "/user/delete" method = "post">
+        <input type = "submit" value = "Delete">
+    </form>
+  </div>
 
   </div>
 
