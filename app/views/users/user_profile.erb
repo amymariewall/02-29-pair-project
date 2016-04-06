@@ -1,23 +1,66 @@
-<h1><%= @user.first_name %> 
-<%= @user.last_name %></h1>
-
+<div class="container">
+  <!-- HEADING -->
+  <div><h1><%= @user.first_name %> 
+  <%= @user.last_name %></h1></div>
 
 <% if @user.id == session["user_id"]%>
-<a href="/user/update">Update</a>
-<form action = "/user/delete" method = "post">
-    <input type = "submit" value = "Delete">
-</form>
 
-  <br>
+  <div class="block text-center">
+    <h1 class="block-title"><%= @user.first_name %> 
+      <%= @user.last_name %></h1>
+    <form action="/update/create" method="post">
+      <div class="input-group">
+        <input type="text" class="form-control" name="status_update" placeholder="Update status...">
+        <span class="input-group-btn">
+          <input type="submit" value="Post New Status" class="btn btn-default">
+        </span>
+      </div>
+    </form> 
+  </div>
+
+
+  
+  <div>
   <h3>Update your status:</h3>
   <form action="/update/create" method="post">
     <input type="text" name = "status_update" placeholder="Update status..."><br>
     <input type="submit" value = "Post">
-  </form>
+  </form>    
 
-  <br>  
-  <h3>Donations Received:</h3><br>
-  <% @donations_received.each do |d| %>
+  </div>
+
+  <div>    
+    <a href="/user/update">Update</a>
+    <form action = "/user/delete" method = "post">
+        <input type = "submit" value = "Delete">
+    </form>
+
+    <%if @status_updates_time != [] %>
+
+    <h3><%= @user_presenter.status_updates_header(session["user_id"]) %></h3>
+
+      <%@status_updates_time.each do |s|%>
+        <%= s.status_update%><br><b><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. </b><br><br>
+
+    <% if @user.id == session["user_id"]%>
+
+      <form action = "/update/edit/<%=s.id%>" method = "post">
+          <input type = "submit" value = "Edit">
+      </form>
+      <form action = "/update/delete/<%=s.id%>" method = "post">
+          <input type = "submit" value = "Delete">
+      </form>
+      <br>
+      <br>
+    <%end%>
+    <%end%>
+    <%end%>
+
+    </div>
+
+    <div> 
+    <h3>Donations Received:</h3><br>
+    <% @donations_received.each do |d| %>
     <a href="/user/profile/<%= d.access_investor.id %>"><%= d.access_investor.first_name %> <%= d.access_investor.last_name %></a> <%= d.amount %><br>
     <% if d.paid == nil || d.paid == false %>
     <form action="/investments/<%= d.id %>/update/paid" method="post"> 
@@ -27,48 +70,44 @@
     <% end %>
     <% end %>
 
+    </div>
+
 <% else %>
+
+<!-- DONATE BUTTON SHOULD GO IN THE TOP RIGHT CORNER
+ -->  <div>
   <a href="/investments/invest/<%= @user.id %>">Donate</a>
-<%end%><br>
-<%if @user.id != session["user_id"]%> 
-<a href="/user/profile/<%=session["user_id"]%>">Back to my profile</a>
-<%end%><br>
-<p>
-<% if @user.debt_amount != 0 || nil %>
-  <h3>Amount needed:</h3>
-  $<%= @user.debt_amount %>
-  </p>
-<% end %>
+<%end%></div>
 
-<%if @status_updates_time != [] %>
-
-<h3><%= @user_presenter.status_updates_header(session["user_id"]) %></h3>
-
-  <%@status_updates_time.each do |s|%>
-    <%= s.status_update%><br><b><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. </b><br><br>
-
-<% if @user.id == session["user_id"]%>
-
-  <form action = "/update/edit/<%=s.id%>" method = "post">
-      <input type = "submit" value = "Edit">
-  </form>
-  <form action = "/update/delete/<%=s.id%>" method = "post">
-      <input type = "submit" value = "Delete">
-  </form>
-  <br>
-  <br>
-<%end%>
-<%end%>
-<%end%>
+<!-- BACK TO MY PROFILE BUTTON IN TOP RIGHT CORNER
+ -->  <div>
+    <%if @user.id != session["user_id"]%> 
+    <a href="/user/profile/<%=session["user_id"]%>">Back to my profile</a>
+    <%end%><br>
+    <p>
+    <% if @user.debt_amount != 0 || nil %>
+      <h3>Amount needed:</h3>
+      $<%= @user.debt_amount %>
+      </p>
+    <% end %>
+  </div>
 
 <% if @investments != [] %><br><br>
-<h3> Recently made donations:</h3>
-  <% @investments.each do |i| %>
-  <a href="/user/profile/<%= i.access_student.id %>"><%= i.access_student.first_name %> <%= i.access_student.last_name %></a>
-  - $<%= i.amount %><br>
-  <% end %>
-<% end %>
+  <div>
+    <h3> Recently made donations:</h3>
+      <% @investments.each do |i| %>
+      <a href="/user/profile/<%= i.access_student.id %>"><%= i.access_student.first_name %> <%= i.access_student.last_name %></a>
+      - $<%= i.amount %><br>
+      <% end %>
+  </div>
+    <% end %>
+
+  <div>
 
 <br><br>
 <a href="/">Home</a><br>
 <a href="/user/list">List of Users</a>
+
+  </div>
+
+</div>
