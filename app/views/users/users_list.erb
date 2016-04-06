@@ -1,6 +1,9 @@
 <div class="container">
 <ul class="nav nav-bordered">
   <li class="active">
+    <a href="/">Home</a>
+  </li>
+  <li class="active">
     <a href="/user/profile">Profile</a>
   </li>
   <li class="active">
@@ -15,6 +18,8 @@
 
   <h1>List of Users</h1>
 
+  <div class="block block-bordered text-center">
+
   <% @users.each do |u| %>
 
   <a href="/user/profile/<%=u.id%>"><%= u.first_name%> <%= u.last_name%></a>
@@ -26,3 +31,9 @@
     </div>
   </div>
 </div>
+
+<style>
+.block{
+    padding: 20px 0;
+}
+</style>

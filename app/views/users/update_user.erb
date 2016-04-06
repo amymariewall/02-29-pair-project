@@ -1,5 +1,22 @@
- 
-<h1> Edit your profile!</h1>
+<div class="container">
+<ul class="nav nav-bordered">
+    <li class="active">
+      <a href="/">Home</a>
+    </li>
+    <li class="active">
+      <a href="/user/profile">Profile</a>
+    </li>
+    <li class="active">
+    <a href="/search/user">Browse Students</a>
+    </li>
+    <li class="active">
+      <a href="/user/list">List of Users</a>
+    </li>
+    <li class="active">
+      <a href="/logout">Log Out</a>
+    </li>
+  </ul>
+<div class="text-center"> 
 
   <% if @errors != [] && @errors != nil %>
     <% @errors.each do |e| %>
@@ -7,23 +24,38 @@
     <% end %>
   <% end %>
 
- <form action = "/user/process/update" method = "post">
-    First Name: 
-    <input type = "text" name = "first_name" value = "<%= @user.first_name %>">
-    <br><br>
-    Last Name: 
-    <input type = "text" name = "last_name" value = "<%= @user.last_name %>">
-    <br><br>
-    Email Address: 
-    <input type = "text" name = "email" value = "<%= @user.email %>">
-    <br><br>
-    Password: 
-    <input type = "text" name = "password" value = "<%= @user.password %>">
-    <br><br>
-    Debt Amount:
-    <input type = "number" name = "debt_amount" value ="<%=@user.debt_amount%>">
+  <h1> Edit your profile!</h1>
 
-  <input type = "submit" value = "Update">
-</form>
-<br><br>
-<a href="/">Home</a>
+  <div class="block block-bordered text-center">
+
+  <form class="form-block" method="post" action="/user/process/update" style="margin: 0 300px">
+    <h3>First Name:</h3>
+    <input type = "text" name = "first_name" value = "<%= @user.first_name %>">
+    <br>
+    <h3>Last Name:</h3>
+    <input type = "text" name = "last_name" value = "<%= @user.last_name %>">
+    <br>
+    <h3>Email Address:</h3>
+    <input type = "text" name = "email" value = "<%= @user.email %>">
+    <br>
+    <h3>Password:</h3>
+    <input type = "text" name = "password" value = "<%= @user.password %>">
+    <br>
+    <h3>Debt Amount:</h3>
+    <input type ="number" name ="debt_amount" value ="<%=@user.debt_amount%>">
+    <br><br>
+      <button class="btn btn-primary m-b">Submit</button>
+    </form>
+
+    <a href="/">Home</a> | <a href="/user/profile">Profile</a>
+    </div>
+    </div>
+</div>
+
+<style>
+.block{
+    padding: 20px 0;
+}
+</style>
+
+
