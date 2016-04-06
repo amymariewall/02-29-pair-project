@@ -25,9 +25,10 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "updates", force: :cascade do |t|
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.string   "status_updates"
     t.string   "status_update"
   end
 
