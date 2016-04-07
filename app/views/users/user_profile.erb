@@ -44,8 +44,80 @@
       </div>
     </form> 
   </div>
+  <div class="statcard statcard-primary p-a-md m-b">
+  <h3 class="statcard-number">
+    12,938
+    <small class="delta-indicator delta-positive">5%</small>
+  </h3>
+  <span class="statcard-desc">Page views</span>
+</div>
 
-  <%if @status_updates_time != [] %>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <ul class="featured-list featured-list-bordered">
+        <li class="m-b-md">
+          <div class="featured-list-icon">
+            <span class="icon icon-dropbox"></span>
+          </div>
+
+          <h3>Save things</h3>
+          <p>
+            Use dropbox to save things in the "cloud" because throwing things away is stressful and this way you don't have to.
+          </p>
+        </li>
+
+        <li>
+          <div class="featured-list-icon">
+            <span class="icon icon-github"></span>
+          </div>
+          <h3>Fork things</h3>
+          <p>
+            Use github to share things on the internet then change them. Make things better. Free software? But not as in beer.
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <ul class="featured-list featured-list-bordered">
+        <li class="m-b-md">
+          <div class="featured-list-icon">
+            <span class="icon icon-medium"></span>
+          </div>
+
+          <h3>Write things</h3>
+          <p>
+            Use Medium to write things down and sound smart. Also when you write, your writings looks pretty and that is cool.
+          </p>
+        </li>
+
+        <li>
+          <div class="featured-list-icon">
+            <span class="icon icon-twitter"></span>
+          </div>
+          <h3>Tweet things</h3>
+          <p>
+            Use twitter to share 140 characters worth of anything you want. Pictures, videos, etc. It doesn't really matter.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <div class="row">
+  <div class="col-sm-6">
+    <div class="statcard statcard-primary p-a-md">
+      <h3 class="statcard-number">
+        12,938
+        <small class="delta-indicator delta-positive">5%</small>
+      </h3>
+      <span class="statcard-desc">Page views</span>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <%if @status_updates_time != [] %>
   <div class="text-center">
     <h3><%= @user_presenter.status_updates_header(session["user_id"]) %></h3>
     <%@status_updates_time.each do |s|%>
@@ -74,38 +146,14 @@
     <%end%>
   </div>
   <%end%>
-
-
-
+  </div>
+  </div>
 
 
 
   </div>
 
   
-
-    <%if @status_updates_time != [] %>
-
-    <h3><%= @user_presenter.status_updates_header(session["user_id"]) %></h3>
-
-      <%@status_updates_time.each do |s|%>
-        <%= s.status_update%><br><b><%= (Time.now - s.created_at.to_time).to_i/60%> Minutes ago. </b><br><br>
-
-    <% if @user.id == session["user_id"]%>
-
-      <form action = "/update/edit/<%=s.id%>" method = "post">
-          <input type = "submit" value = "Edit">
-      </form>
-      <form action = "/update/delete/<%=s.id%>" method = "post">
-          <input type = "submit" value = "Delete">
-      </form>
-      <br>
-      <br>
-    <%end%>
-    <%end%>
-    <%end%>
-
-    </div>
 
     <div> 
     <h3>Donations Received:</h3><br>
