@@ -1,6 +1,31 @@
+<div class="container text-center">
+<ul class="nav nav-bordered">
+    <li class="active">
+      <a href="/">Home</a>
+    </li>
+    <li class="active">
+      <a href="/user/profile">Profile</a>
+    </li>
+    <li class="active">
+      <a href="/user/list">List of Users</a>
+    </li>
+    <li class="active">
+      <a href="/logout">Log Out</a>
+    </li>
+  </ul>
+
 <h2>Search Results:</h2>
+
+<div class="block block-bordered text-center">
 
 <% @search_results.each do |u| %>
 <a href="/user/profile/<%=u.id%>"><%= u.first_name %> <%= u.last_name %></a>
 <br>
 <% end %>
+</div>
+
+<style>
+.block{
+    padding: 20px 0;
+}
+</style>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container text-center">
   <ul class="nav nav-bordered">
     <li class="active">
       <a href="/">Home</a>
@@ -14,13 +14,15 @@
     </li>
   </ul>
 
-  <h2>Find a user:</h2>
-    <% if @error != nil %>
+  <% if @error != nil %>
     <%= @error %><br>
   <% end %>
-  
-
-
+  <br>
+  <div class="block block-inverse text-center">
+  <div class="block-foreground">
+    <h1 class="block-title">User Search</h1>
+    <h4 class="text-muted">Search below for a user.</h4>
+    <div class="text-center">
   <form method="post" action="/search/user/process">
     <select class="custom-select" name="search_criteria">
       <option selected disabled>--</option>
@@ -28,7 +30,23 @@
       <option value="first_name">First Name</option>
       <option value="last_name">Last Name</option>
     </select>
+    <br><br>
+    <div class="block_button">
     <input type="text" name="search_term" placeholder="Search">
       <br><br><input type="submit" value="Search">
   </form>
+  </div>
 </div>
+  </div>
+
+  <div class="block-background">
+    <iframe frameBorder="0" src="http://4kwallpapers.site/wp-content/uploads/2011/04/blue-dot-sparkle-3d-abstract-wide-screen.jpg"></iframe>
+  </div>
+</div>
+<br>
+<style>
+.block_button{
+  color: black;
+}
+</style>
+
