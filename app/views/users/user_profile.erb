@@ -32,10 +32,32 @@
     </ul>
   </div>  
 
+
+     </div>
+
+
   <div class="block text-center">
-    <h1 class="block-title"><%= @user.first_name %> 
+  <h1 class="block-title"><%= @user.first_name %> 
       <%= @user.last_name %></h1>
-    <form action="/update/create" method="post">
+      <% if @user.debt_amount != 0 || nil %>
+    <h3 class="block-title">$<%= @user.debt_amount %></h3>
+      <h4 class="text-muted">Still Needed</h4>
+      <% end %>
+      <div>
+  <a href="/investments/invest/<%= @user.id %>">Donate</a>
+<%end%></div>
+      <button class="btn btn-primary m-t">With a simple button</button>
+  </div>
+  
+
+ 
+
+
+  <div class="container">
+
+  <div>
+
+  <form action="/update/create" method="post">
       <div class="input-group">
         <input type="text" class="form-control" name="status_update" placeholder="Update status...">
         <span class="input-group-btn">
@@ -43,10 +65,30 @@
         </span>
       </div>
     </form> 
+
   </div>
 
 
 
+ <%if @status_updates_time != [] %>
+    <h3><%= @user_presenter.status_updates_header(session["user_id"]) %></h3>
+      <%@status_updates_time.each do |s|%>
+
+    <div class="callout">
+    <div class="callout-content">
+      <strong><%= (Time.now - s.created_at.to_time).to_i/60 %> Minutes ago.</strong> <%= s.status_update%>
+    </div>
+
+    <div class="callout-secondary">
+    <% if @user.id == session["user_id"]%>
+      <form action = "/update/edit/<%=s.id%>" method = "post">
+        <input type = "submit" value = "Edit" class="btn btn-primary">
+      </form>
+    </div>
+    <% end %>
+  </div>
+    <% end %>
+    <% end %>
 
    
     <h3>Donations Received:</h3>
@@ -88,35 +130,7 @@
 
 
 
-    <%if @status_updates_time != [] %>
-  <div class="text-center">
-    <h3><%= @user_presenter.status_updates_header(session["user_id"]) %></h3>
-    <%@status_updates_time.each do |s|%>
-    <blockquote class="pull-quote">
-        <p>
-          <i><%= s.status_update%></i>
-        </p>
-      <cite><%= (Time.now - s.created_at.to_time).to_i/60 %> Minutes ago.</cite>
-    
-      <% if @user.id == session["user_id"]%>
-
-        <ul class="nav nav-pills">
-              <li>
-                <form action = "/update/edit/<%=s.id%>" method = "post">
-                  <input type = "submit" value = "Edit" class="btn btn-primary">
-                </form>
-              </li>
-              <li>
-                <form action = "/update/delete/<%=s.id%>" method = "post">
-                  <input type = "submit" value = "Delete" class="btn btn-primary">
-                </form>
-              </li>
-        </ul>
-      </blockquote>
-      <%end%>
-    <%end%>
-  </div>
-  <%end%>
+ 
   </div>
 
 
@@ -127,12 +141,9 @@
 
  
 
-<% else %>
 
 <!-- DONATE BUTTON SHOULD GO IN THE TOP RIGHT CORNER
- -->  <div>
-  <a href="/investments/invest/<%= @user.id %>">Donate</a>
-<%end%></div>
+ -->  
 
 <!-- BACK TO MY PROFILE BUTTON IN TOP RIGHT CORNER
  -->  <div>
@@ -140,11 +151,7 @@
     <a href="/user/profile/<%=session["user_id"]%>">Back to my profile</a>
     <%end%><br>
     <p>
-    <% if @user.debt_amount != 0 || nil %>
-      <h3>Amount needed:</h3>
-      $<%= @user.debt_amount %>
-      </p>
-    <% end %>
+    
   </div>
 
 
