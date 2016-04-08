@@ -1,5 +1,36 @@
+<div class="container">
+<ul class="nav nav-bordered">
+  <li class="active">
+    <a href="/">Home</a>
+  </li>
+  <li class="active">
+    <a href="/user/profile">Profile</a>
+  </li>
+  <li class="active">
+    <a href="/search/user">Browse Students</a>
+  </li>
+  <li class="active">
+      <a href="/user/list">List of Users</a>
+    </li>
+  <li class="active">
+    <a href="/logout">Log Out</a>
+  </li>
+</ul>
+<div class="block text-center">
+
+<h1>Edit your status!</h1>
+<div class="block block-bordered text-center">
 <form action = "/update/process/<%= @update.id%>" method = "post">
-    Edit your status! <br><br>
     <input type="text" name="status" value="<%= @update.status_update %>">
     <input type="submit" value = "Update">
 </form>
+<br>
+
+</div>
+</div>
+
+<style>
+.block{
+    padding: 20px 0;
+}
+</style>
