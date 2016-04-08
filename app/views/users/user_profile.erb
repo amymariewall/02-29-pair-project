@@ -1,7 +1,9 @@
 
+
 <div class="container">
 
-<% if @user.id == session["user_id"]%>
+
+
 
   <div>
       <ul class="nav nav-pills">
@@ -11,12 +13,25 @@
           List of Users
         </a>
       </li>
+      <% if @user.id == session["user_id"]%>
       <li>
         <a href="/user/update">
           <span class="icon icon-cog"></span>
           Update Settings
         </a>
       </li>
+      <% end %>
+
+      <% if @user.id != session["user_id"]%>
+      <li>
+      <a href="/user/profile/<%=session["user_id"]%>">
+          <span class="icon icon-cog"></span>
+          Back to my profile
+        </a>
+      </li>
+      <% end %>
+
+
       <li>
         <a href="/">
           <span class="icon icon-home"></span>
@@ -43,10 +58,13 @@
     <h3 class="block-title">$<%= @user.debt_amount %></h3>
       <h4 class="text-muted">Still Needed</h4>
       <% end %>
+      <% if @user.id != session["user_id"]%>
       <div>
-  <a href="/investments/invest/<%= @user.id %>">Donate</a>
-<%end%></div>
-      <button class="btn btn-primary m-t">With a simple button</button>
+  <a href="/investments/invest/<%= @user.id %>">
+    <button class="btn btn-primary m-t">Donate Now</button></a>
+  </div>
+  <%end%>
+      
   </div>
   
 
@@ -146,25 +164,11 @@
  -->  
 
 <!-- BACK TO MY PROFILE BUTTON IN TOP RIGHT CORNER
- -->  <div>
-    <%if @user.id != session["user_id"]%> 
-    <a href="/user/profile/<%=session["user_id"]%>">Back to my profile</a>
-    <%end%><br>
-    <p>
-    
-  </div>
+ -->  
 
 
 
-  <div>
+ 
+   
+  
 
-<div>    
-    <a href="/user/update">Update</a>
-    <form action = "/user/delete" method = "post">
-        <input type = "submit" value = "Delete">
-    </form>
-  </div>
-
-  </div>
-
-</div>
