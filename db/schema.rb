@@ -15,6 +15,20 @@ ActiveRecord::Schema.define(version: 0) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "choices", force: :cascade do |t|
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "user_id"
+    t.integer  "destination_id"
+  end
+
+  create_table "destinations", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "airport_code"
+    t.string   "name"
+  end
+
   create_table "investments", force: :cascade do |t|
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -25,20 +39,22 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "updates", force: :cascade do |t|
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "user_id"
-    t.string   "status_updates"
     t.string   "status_update"
   end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
+    t.string   "username"
     t.string   "email"
     t.string   "password"
+    t.integer  "budget"
+    t.string   "first_name"
+    t.string   "last_name"
     t.float    "debt_amount"
   end
 
