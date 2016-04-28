@@ -94,7 +94,7 @@
 
     <div class="callout">
     <div class="callout-content">
-      <strong><%= (Time.now - s.created_at.to_time).to_i/60 %> Minutes ago.</strong> <%= s.status_update%>
+      <strong><%= s.time_display %> Minutes ago.</strong> <%= s.status_update%>
     </div>
 
     <div class="callout-secondary">
