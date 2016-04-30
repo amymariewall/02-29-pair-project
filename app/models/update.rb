@@ -3,27 +3,27 @@
 class Update < ActiveRecord::Base
 
   def display_minute(min_ago)
-    min_ago.to_s + " minute ago "
+    min_ago.to_s + " minute ago"
   end
 
   def display_minutes(min_ago)
-    min_ago.to_s + " minutes ago "
+    min_ago.to_s + " minutes ago"
   end
 
   def display_hour(min_ago)
-    "About one hour ago "
+    "About one hour ago"
   end
 
   def display_hours(min_ago)
-    (min_ago/60).to_s + " hours ago "
+    (min_ago/60).to_s + " hours ago"
   end
 
   def display_day
-    "One day ago "
+    "One day ago"
   end
 
   def display_days(min_ago)
-    (min_ago/1440).to_s + " days ago "
+    (min_ago/1440).to_s + " days ago"
   end
 
   def posted_ago
@@ -45,6 +45,4 @@ class Update < ActiveRecord::Base
     end
   end
 
-  # @update = Update.where...
-  # @update.time_display
 end
