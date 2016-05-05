@@ -7,6 +7,7 @@ DB.define_column("users","email", "string")
 DB.define_column("users","password","string")
 DB.define_column("users","debt_amount","float")
 DB.define_column("users", "active", "boolean")
+DB.define_column("users", "confirm_token", "string")
 
 DB.define_table("investments")
 DB.define_column("investments","investor_user_id","integer")
