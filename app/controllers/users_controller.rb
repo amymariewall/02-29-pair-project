@@ -28,7 +28,10 @@ MyApp.post "/create/user" do
       @activation_message = "Thanks for registering! Please check your email to confirm your account."
     end
 
-    redirect "/login" #this will change to a home page with a message for the user to check their email. the link in the email will lead them to the sign in page
+    erb :"logins/login"
+    # redirecting to the "/login" controller action meant losing scope of our @activation_message variable, so we loaded the corresponding erb as a response instead.
+    
+    # redirect "/login" #this will change to a home page with a message for the user to check their email. the link in the email will lead them to the sign in page
   else 
     @errors = @user.get_errors
     erb :"users/create"
