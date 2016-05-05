@@ -9,19 +9,24 @@
   </li>
   
   <% if session["user_id"] != nil %>
-  <li class="active">
-    <a href="user/list">List of Users</a>
-  </li>
-  <li class="active">
-    <a href="/logout">Log Out</a>
-  </li>
+    <li class="active">
+      <a href="user/list">List of Users</a>
+    </li>
+    <li class="active">
+      <a href="/logout">Log Out</a>
+    </li>
+  <%end%>
+
 </ul>
-<%end%>
+  
 
 
   <div class="block text-center">
     <h1 class="block-title">Welcome to StuLo</h1>
     <h4 class="text-muted">The Student Debt Reduction App - Eliminating America's student debt issue one donation at a time.</h4>
+    <% if @activation_message %>
+      <%= @activation_message %>
+    <% end %>
     <% if session["user_id"] == nil %>
     <a href="/login"><button class="btn btn-primary m-t"br>Login</button></a>
     <a href="/signup"><button class="btn btn-primary m-t"br>Sign Up</button></a>

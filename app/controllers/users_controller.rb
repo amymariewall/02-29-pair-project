@@ -24,14 +24,13 @@ MyApp.post "/create/user" do
     # at this point @user.active == nil
     if !@user.active 
       @user.confirm_token = SecureRandom.urlsafe_base64.to_s
+      binding.pry
       Pony.mail(:to => @user.email, :from => 'do-not-reply', :subject => 'Confirm your StuLo account', :body => "Welcome to StuLo #{@user.first_name} #{@user.last_name}! Please confirm your account at this link: http://localhost:9292/confirm/#{@user.confirm_token}")
       @activation_message = "Thanks for registering! Please check your email to confirm your account."
     end
 
-    erb :"logins/login"
-    # redirecting to the "/login" controller action meant losing scope of our @activation_message variable, so we loaded the corresponding erb as a response instead.
+    erb :"main/homepage"
     
-    # redirect "/login" #this will change to a home page with a message for the user to check their email. the link in the email will lead them to the sign in page
   else 
     @errors = @user.get_errors
     erb :"users/create"

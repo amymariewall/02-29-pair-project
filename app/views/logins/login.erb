@@ -6,13 +6,6 @@
       Login to StuLo
     </h2>
 
-    <% if @activation_message %>
-      <%# binding.pry %>
-      <div class="alert alert-danger" role="alert">
-        <%= @activation_message %>
-      </div>
-    <% end %>
-
     <% if @error != nil %>
       <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
