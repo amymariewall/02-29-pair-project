@@ -19,6 +19,9 @@
 
 
 <body>
+  <% if @activaction_message %>
+    <%= @activation_message %>
+  <% end %>
 
   <%= yield %>
 

@@ -21,7 +21,14 @@ MyApp.post "/create/user" do
   @user.debt_amount = params["debt_amount"]
   if @user.is_valid == true
     @user.save
-    redirect "/login"
+    # at this point @user.active == nil
+    if !@user.active 
+      @user.confirm_token = SecureRandom.urlsafe_base64.to_s
+      Pony.mail(:to => @user.email, :from => 'do-not-reply', :subject => 'Confirm your StuLo account', :body => "Welcome to StuLo #{@user.first_name} #{@user.last_name}! Please confirm your account at this link: http://localhost:9292/confirm/#{@user.confirm_token}")
+      @activation_message = "Thanks for registering! Please check your email to confirm your account."
+    end
+
+    redirect "/login" #this will change to a home page with a message for the user to check their email. the link in the email will lead them to the sign in page
   else 
     @errors = @user.get_errors
     erb :"users/create"
@@ -92,6 +99,8 @@ MyApp.post "/search/user/process" do
   erb :"users/search_results"
   end
 end
+
+
 
 
 
