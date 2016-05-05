@@ -42,9 +42,10 @@ end
 MyApp.get "/confirm/:confirm_token" do
   @user = User.find_by_confirm_token(params[:confirm_token])
   if @user
-    @user.active == true
-    @user.confirm_token == nil
+    @user.active = true
+    @user.confirm_token = nil
     @user.save
+    binding.pry
     redirect "/login"
   else
     redirect "/signup"
