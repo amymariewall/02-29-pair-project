@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "email"
     t.string   "password"
     t.float    "debt_amount"
+    t.boolean  "active"
   end
 
 end
