@@ -24,16 +24,30 @@ MyApp.post "/create/user" do
     # at this point @user.active == nil
     if !@user.active 
       @user.confirm_token = SecureRandom.urlsafe_base64.to_s
-      binding.pry
+      @user.save
       Pony.mail(:to => @user.email, :from => 'do-not-reply', :subject => 'Confirm your StuLo account', :body => "Welcome to StuLo #{@user.first_name} #{@user.last_name}! Please confirm your account at this link: http://localhost:9292/confirm/#{@user.confirm_token}")
       @activation_message = "Thanks for registering! Please check your email to confirm your account."
+      binding.pry
     end
 
     erb :"main/homepage"
-    
+    # alex has an idea about this to revisit. user methods.
+
   else 
     @errors = @user.get_errors
     erb :"users/create"
+  end
+end
+
+MyApp.get "/confirm/:confirm_token" do
+  @user = User.find_by_confirm_token(params[:confirm_token])
+  if @user
+    @user.active == true
+    @user.confirm_token == nil
+    @user.save
+    redirect "/login"
+  else
+    redirect "/signup"
   end
 end
 
