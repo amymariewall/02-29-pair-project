@@ -6,7 +6,6 @@ end
 
 MyApp.post "/login/create" do 
   @user = User.find_by_email(params[:email])
-  binding.pry
     if @user != nil && @user.password == params[:password] && @user.active == true
       session["user_id"] = @user.id
       if session["path_info"] == nil

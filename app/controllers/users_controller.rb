@@ -27,11 +27,10 @@ MyApp.post "/create/user" do
       @user.save
       Pony.mail(:to => @user.email, :from => 'do-not-reply', :subject => 'Confirm your StuLo account', :body => "Welcome to StuLo #{@user.first_name} #{@user.last_name}! Please confirm your account at this link: http://localhost:9292/confirm/#{@user.confirm_token}")
       @activation_message = "Thanks for registering! Please check your email to confirm your account."
-      binding.pry
     end
 
     erb :"main/homepage"
-    # alex has an idea about this to revisit. user methods.
+    # Redirecting to "/" would be better. Figure out how to pass @activation_message to that action.
 
   else 
     @errors = @user.get_errors
@@ -45,7 +44,6 @@ MyApp.get "/confirm/:confirm_token" do
     @user.active = true
     @user.confirm_token = nil
     @user.save
-    binding.pry
     redirect "/login"
   else
     redirect "/signup"
